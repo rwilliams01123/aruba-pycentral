@@ -8,7 +8,6 @@ import os
 import os.path
 import json
 import csv
-from pprint import pprint
 import re
 import requests
 
@@ -21,7 +20,7 @@ def api_call_verify(method, url, headers, payload):
         result = re.sub(r".+\.com\/(.+)", "\\1", url, 1)
         file_name = result.replace('/', '-')
         print(f'Success - {file_name}')
-        export_json(response,'','','https__'+file_name)
+        #export_json(response,'','','https__'+file_name)
         return response
 
 
