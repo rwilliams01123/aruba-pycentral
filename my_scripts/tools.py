@@ -3,19 +3,13 @@
 '''
 import as:
 from tools import tools
-from tools.batch_helper import batch_helper
-from tools import base_meraki as bm
 '''
 import os
 import os.path
-import time
 import json
 import csv
-from tools.batch_helper import batch_helper
-from tools import base_meraki as bm
 from pprint import pprint
 import re
-from meraki import APIError
 import requests
 
 def api_call_verify(method, url, headers, payload):
