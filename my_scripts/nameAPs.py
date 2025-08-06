@@ -5,7 +5,7 @@ import tools_rwilliams01123 as tools
 
 
 def main():
-    API_KEY = input("API Key: ")
+    API_KEY = input("Access Token: ")
     ap_list = tools.quick_import_csv()
 
     headers = {
@@ -14,24 +14,17 @@ def main():
     }
 
     for i in ap_list:
-        # Get per AP settings
-        url = (f"https://apigw-prod2.central.arubanetworks.com/"
-               f"/configuration/v1/ap_settings_cli/{i['serial']}")
+        serial = i['serial']
+        new_name = i['new_hostname']
+        #
+        url = f"https://apigw-prod2.central.arubanetworks.com/configuration/v2/ap_settings/{serial}"
         get_response = tools.api_call_verify('get', url, headers, None)
         # Modify hostname
-        get_response[1] = f"  hostname {i['name']}"
-        !
+        get_response['hostname'] = new_name
         # format get_response for requests call
-        payload = json.dumps({"clis": get_response})
+        payload = json.dumps(get_response)
         post_response = tools.api_call_verify('post', url, headers, payload)
-        #
-        #
-        '''
-        url = (f"https://apigw-prod2.central.arubanetworks.com/"
-               f"configuration/v1/ap_settings/{i['serial']}")
-        payload = json.dumps({"hostname": i['name'], "ip_address": "0.0.0.0"})
-        response = tools.api_call_verify('POST', url, headers, payload)
-        '''
+        print("\n")
 
 
 if __name__ == "__main__":
