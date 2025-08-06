@@ -11,6 +11,7 @@ defusedxml
 docopt
 executing
 fastjsonschema
+halo
 idna
 ipython
 jedi
